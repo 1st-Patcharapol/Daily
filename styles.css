@@ -1,0 +1,448 @@
+:root {
+    --primary: #6c5ce7;
+    --secondary: #a8a5e6;
+    --accent: #ff7675;
+    --light: #f8f9ff;
+    --dark: #2d3436;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #f8f9ff 0%, #f1f3fa 100%);
+    margin: 0;
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem 0;
+    position: relative;
+}
+
+.header h1 {
+    font-weight: 600;
+    font-size: 2.5rem;
+    margin: 0;
+    color: var(--dark);
+    letter-spacing: -0.05em;
+}
+
+.header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+    margin: 1rem auto;
+    border-radius: 2px;
+}
+
+.time-block {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1rem;
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem;
+    gap: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.time-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.08);
+}
+
+.hour {
+    width: 140px;
+    font-weight: 500;
+    color: var(--primary);
+    font-size: 0.95rem;
+    position: relative;
+    padding-left: 24px;
+}
+
+.hour::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: var(--secondary);
+    border-radius: 50%;
+}
+
+.description {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    resize: none;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.description:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+}
+
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.save-btn,
+.delete-btn {
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.save-btn {
+    background: var(--primary);
+    color: white;
+}
+
+.save-btn:hover {
+    background: #5b4bc4;
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    background: var(--light);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+}
+
+.delete-btn:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* Current Time Indicator */
+.current-time {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    z-index: 1;
+    box-shadow: 0 0 8px rgba(255, 118, 117, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .hour {
+        width: 100%;
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .hour::before {
+        display: none;
+    }
+
+    .button-group {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .save-btn,
+    .delete-btn {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+.past {
+    opacity: 0.6;
+    background: repeating-linear-gradient(45deg,
+            transparent,
+            transparent 5px,
+            rgba(0, 0, 0, 0.02) 5px,
+            rgba(0, 0, 0, 0.02) 10px);
+}
+
+.present {
+    border-left: 4px solid var(--accent);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.01);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.future {
+    background: white;
+}
+
+#currentDay {
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+/* Floating Action Button */
+.fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--primary);
+    color: white;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.fab:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+/* เพิ่มสไตล์สำหรับรายการแผนงาน */
+.plan-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.plan-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 6px 0;
+    background: rgba(108, 92, 231, 0.05);
+    border-radius: 6px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.plan-text {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.add-plan-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.plan-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-family: inherit;
+}
+
+.plan-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.add-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.add-btn:hover {
+    background: #5b4bc4;
+}
+
+.delete-plan-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.delete-plan-btn:hover {
+    color: #ff5252;
+}
+
+/* เพิ่มสไตล์ปุ่มและลำดับความสำคัญ */
+.priority-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-right: 8px;
+    transition: all 0.2s ease;
+}
+
+.priority-low svg {
+    color: #00b894;
+}
+
+.priority-medium svg {
+    color: #fdcb6e;
+}
+
+.priority-high svg {
+    color: #ff7675;
+}
+
+.priority-btn:hover {
+    transform: scale(1.1);
+}
+
+.plan-item {
+    /* เพิ่มตามระดับความสำคัญ */
+    border-left: 4px solid;
+}
+
+.plan-item[data-priority="low"] {
+    border-color: #00b894;
+}
+
+.plan-item[data-priority="medium"] {
+    border-color: #fdcb6e;
+}
+
+.plan-item[data-priority="high"] {
+    border-color: #ff7675;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 300px;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal input[type="time"] {
+    padding: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+}
+
+.fab.clear-all {
+    right: 80px;
+    background: var(--accent);
+}
+
+.fab.clear-all:hover {
+    transform: scale(1.1) rotate(180deg);
+}
+
+/* styles.css */
+/* ... CSS เดิมทั้งหมด ... */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.modal-content input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.modal-content button[type="submit"],
+.modal-content .cancel-btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-content button[type="submit"] {
+    background: var(--primary);
+    color: white;
+    border: none;
+}
+
+.modal-content .cancel-btn {
+    background: var(--light);
+    border: 1px solid var(--secondary);
+    color: var(--dark);
+}
